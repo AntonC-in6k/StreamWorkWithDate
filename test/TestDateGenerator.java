@@ -22,7 +22,7 @@ public class TestDateGenerator {
 
     @Test
     public void zeroInput() throws Exception {
-        assertThat(setupBasicTest(null), is(Collections.emptyList()) );
+        assertThat(setupBasicTest(null), is(Collections.emptyList()));
     }
 
     @Test
@@ -32,10 +32,10 @@ public class TestDateGenerator {
 
     @Test
     public void checkDayFirstOfFebruary() throws Exception {
-        int year=2016;
-        int month=2;
-        int day=1;
-        LocalDate testDay = LocalDate.of(year,month,day);
+        int year = 2016;
+        int month = 2;
+        int day = 1;
+        LocalDate testDay = LocalDate.of(year, month, day);
         assertThat(setupBasicTest(year).get(31), is(testDay));
     }
 

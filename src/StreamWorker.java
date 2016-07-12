@@ -1,18 +1,19 @@
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.ChronoField;
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 /**
  * Created by employee on 7/11/16.
  */
 public class StreamWorker {
 
-    public static final Integer MAX_DAY_FOR_FIRST_OF_WEEKEND = 6;
+    public static final Integer MAX_DAY_FOR_FIRST_OF_WEEKEND = 7;
     public static final Integer MIN_DAY_FOR_LAST_OF_WEEKEND = 6;
 
     public static Stream<LocalDate> generateDays(Integer year) {
@@ -38,10 +39,14 @@ public class StreamWorker {
                         || date.getDayOfMonth() <= MAX_DAY_FOR_FIRST_OF_WEEKEND)
                 .collect(Collectors.groupingBy(LocalDate::getMonth));
 
-        String result = Stream.of(weekends.values())
+        String result = weekends
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
                 .map(Objects::toString)
-                .collect(Collectors.joining(";"));
+                .collect(joining("\n"));
 
+        System.out.print(result);
         return result;
     }
 }
