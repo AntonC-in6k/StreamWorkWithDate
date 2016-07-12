@@ -43,10 +43,9 @@ public class StreamWorker {
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
-                .map(Objects::toString)
+                .map(line->String.format("%1$-10s", line.getKey()) + line.getValue().toString())
                 .collect(joining("\n"));
 
-        System.out.print(result);
         return result;
     }
 }
