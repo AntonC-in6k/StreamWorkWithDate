@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collector;
@@ -12,22 +13,26 @@ import java.util.stream.Stream;
  */
 public class StreamWorker {
 
-    public static List<LocalDate> generateDays(Integer year) {
+    public static Stream<LocalDate> generateDays(Integer year) {
         if (year == null) {
-            return new ArrayList<>();
+            return Stream.empty();
         }
-        List<LocalDate> result;
+
+        Stream<LocalDate> result;
         int numberOfDaysInYear = LocalDate.of(year, 1, 1).lengthOfYear();
         LocalDate currentDay=LocalDate.of(year, 1, 1);
         result = Stream.iterate(currentDay, date-> date.plusDays(1))
-                .limit(numberOfDaysInYear).collect(Collectors.toList());
+                .limit(numberOfDaysInYear);
         return result;
     }
 
 
-    public static List<String> filterDatesByFirstAndLastWeekendInMonth() {
-        List<String> result = new ArrayList<>();
+    public static String printWeekends(Stream<LocalDate> dates) {
 
+        if (dates.collect(Collectors.toList()).size()==0){
+            return "";
+        }
+        String result="fds";
         return result;
     }
 }
