@@ -29,10 +29,13 @@ public class StreamWorker {
 
     public static String printWeekends(Stream<LocalDate> dates) {
 
-        if (dates.collect(Collectors.toList()).size()==0){
-            return "";
+        String result="";
+        List<LocalDate> weekends = new ArrayList();
+        weekends=dates.filter(date -> date.getDayOfWeek().getValue()>5).collect(Collectors.toList());
+        for (LocalDate date :
+                weekends) {
+            result+=date.toString();
         }
-        String result="fds";
         return result;
     }
 }
